@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page for passengers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .accordion {
+            background-color: #225599;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+        .active, .accordion:hover {
+            background-color: lightblue;
+            color: black;
+        }
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<style>
+    @media only screen and (max-width: 575px) {
+        .bottom_border {
+            border-bottom: 1px solid black;
+            /*margin-bottom: 10px;*/
+        }
+        .left_padding {
+            padding-left: 15px !important;
+        }
+        .solid_borders {
+            border: 1px solid black !important;
+            margin-bottom: 10px;
+        }
+    }
+    @media only screen and (min-width: 576px) {
+        .left_border {
+            border-left: 1px dashed black;
+        }
+        .solid_borders {
+            border: 1px solid black !important;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+<header th:insert="layouts.html :: header"></header>
+<div class="container">
+    <h1>Here are all registered routes</h1>
+    <div style="margin-top: 30px; color: red; border: 2px solid red; border-radius: 10px; padding: 20px; font-size: 20px"
+         th:if="${error != null}">
+        <p th:text="${error}"></p>
+    </div>
+    <form th:action="@{/passengerPage}" method="post">
+        <div style="margin-top: 20px">
+            <label for="filter">Keyword for filter</label>
+            <input style="border-color: black" type="text" name="filterPlace" class="form-control" id="filter"
+                   th:value="${filterPlace}">
+            <button style="font-size: 20px; margin-top: 20px; color: #fff; background-color: #225599; border-color: #225599; border-radius: 4px;"
+                    type="submit" th:name="action" th:value="filterByPlace">Find by Keyword
+            </button>
+        </div>
+        <div style="margin-top: 30px; color: black; border: 2px solid black; border-radius: 10px; padding: 20px;
+font-size: 20px" th:if="${routes != null}">
+            <div th:each="route: ${routes}">
+                <div th:if="${route.startTime.equals(now)}">
+                    <button style="border-radius: 5px; margin-top: 10px" class="accordion" type="button" th:text="|From ${route.startingPoint} to ${route.endPoint} at ${route.time} Today|"></button>
+                    <div class="panel" th:insert="layouts.html :: passengerView"></div>
+                </div>
+                <div th:if="${!route.startTime.equals(now)}">
+                    <button style="border-radius: 5px; margin-top: 10px" class="accordion" type="button" th:text="|From ${route.startingPoint} to ${route.endPoint} at ${route.time} on ${route.startTime}|"></button>
+                    <div class="panel" th:insert="layouts.html :: passengerView"></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 40px; text-align: center">
+            <a style="color: #fff; background-color: #225599; border-color: #225599;" class="btn btn-primary"
+               th:href="@{/}">Home Page</a>
+        </div>
+    </form>
+</div>
+<footer style="margin-top: 100px" th:insert="layouts.html :: footer"></footer>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel) {
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

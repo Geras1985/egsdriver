@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Layouts</title>
+</head>
+<body>
+<div th:fragment="header">
+    <div style="height: 150px; background-position: center;background-repeat: no-repeat;
+background-size: cover; background-image: url(../images/egs_background.png)" src="images/egs_background.png">
+    </div>
+    <nav style="color: white !important; margin-bottom: 30px; background-color: #225599"
+         class="navbar navbar-expand-lg static-top">
+        <div class="container">
+            <img style="height: 80px" th:src="@{../images/egs_logo.png}" src="../static/images/egs_logo.png">
+            <button style="color: white !important" class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="color: white !important" class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a style="color: white !important; background-color: #225599;" class="nav-link" th:href="@{/}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: white !important" class="nav-link" th:href="@{/about}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: white !important" class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: white !important" class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div th:fragment="footer">
+    <footer style="position: fixed; bottom: 0; width: 100%" class="page-footer font-small blue">
+        <div style="padding-right: 15px; padding-left: 15px; background-color: #225599; color: white"
+             class="footer-copyright text-center py-3">© 2022 Copyright ENERGIZE GLOBAL SERVICES
+        </div>
+    </footer>
+</div>
+<div th:fragment="passengerView">
+    <div style="margin-bottom: 30px; margin-top: 30px" class="row">
+        <div style="font-size: 25px; text-align: center" class="col-sm-12" th:text="${route.id}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <div class="col-sm-3">Name</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3 bottom_border"
+             th:text="${route.name}"></div>
+        <div class="col-sm-3 left_border">Phone</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3"
+             th:text="${route.phone}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <div class="col-sm-3">Teams app username</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3 bottom_border"
+             th:text="${route.driversTeamsContact}"></div>
+        <div class="col-sm-3 left_border">Starting Point</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3"
+             th:text="${route.startingPoint}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <div class="col-sm-3">End Point</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3 bottom_border"
+             th:text="${route.endPoint}"></div>
+        <div class="col-sm-3 left_border">Day of the Route</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3" type="text"
+             th:text="${route.startTime}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <!-- <div class="col-sm-3">End time</div>-->
+        <!-- <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3 bottom_border" th:text="${route.schedule}"></div>-->
+        <div class="col-sm-3">Free Sits</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3 bottom_border"
+             th:text="${route.freeSits}"></div>
+        <div class="col-sm-3 left_border">Time</div>
+        <div style="padding-right: 0px; padding-left: 0px;" class="left_padding col-sm-3"
+             th:text="${route.time}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <div class="col-sm-3">Trip Description</div>
+        <div class="col-sm-9" th:text="${route.tripDescription}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <div class="col-sm-3">Car Description</div>
+        <div class="col-sm-9" th:text="${route.carDescription}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px; word-wrap: break-word"
+         class="solid_borders row">
+        <div class="col-sm-3">Comment</div>
+        <div class="col-sm-9" th:text="${route.commend}"></div>
+    </div>
+    <div style="border-bottom: 1px dashed black; padding-top: 10px; padding-bottom: 10px"
+         class="solid_borders row">
+        <div class="col-sm-3">Is Route Active?</div>
+        <div th:if="${route.active} == true" class="col-sm-9">Yes</div>
+        <div th:if="${route.active} == false" class="col-sm-9">No</div>
+    </div>
+    <div style="margin-top: 20px">
+        <button style="color: #fff; background-color: #225599; border-color: #225599; border-radius: 4px;"
+                type="submit" th:name="action" th:value="${route.id}">Reserve Seat
+        </button>
+    </div>
+</div>
+</body>
+</html>
